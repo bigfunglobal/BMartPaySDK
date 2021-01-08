@@ -32,7 +32,7 @@ public class BigFunSDK {
      */
     static boolean isDebug = false;
     private static String mSource;
-    private static final String VERSION = "1.0.1";
+    private static final String VERSION = "1.0.2";
 
     private BigFunSDK() {
 
