@@ -293,7 +293,8 @@ public class HttpUtils {
                                             PayUtils.getInstance().pay(
                                                     bean.getData(),
                                                     activity,
-                                                    REQUEST_CODE
+                                                    REQUEST_CODE,
+                                                    listener
                                             );
                                         } else {
                                             report(ORDER_FAIL, bean.getMsg());

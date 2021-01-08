@@ -27,7 +27,7 @@ public class PayUtils {
 
     public void pay(PaymentOrderBean.DataBean bean,
                     Activity activity,
-                    int requestCode) {
+                    int requestCode, ResponseListener listener) {
         LogUtils.log(bean.toString());
         //PaymentChannel == 1 paytm
         //OpenType == 5 SDK open
@@ -51,9 +51,15 @@ public class PayUtils {
             });
         } else if (openType == 6) { //UPI
             activity.runOnUiThread(() -> {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(""));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                activity.startActivity(intent);
+                try {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(bean.getJumpUrl()));
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    activity.startActivity(intent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    listener.onFail(e.getMessage());
+                }
             });
         } else {
             activity.runOnUiThread(() -> {
@@ -96,7 +102,6 @@ public class PayUtils {
                         paytmIntent.putExtra("bill", bundle);
                         activity.startActivityForResult(paytmIntent, requestCode);
                     } else {
-                        //未安装Paytm
                         Intent paytmIntent = new Intent();
                         paytmIntent.setComponent(new ComponentName("net.one97.paytm", "net.one97.paytm.AJRRechargePaymentActivity"));
                         paytmIntent.putExtra("paymentmode", 2);

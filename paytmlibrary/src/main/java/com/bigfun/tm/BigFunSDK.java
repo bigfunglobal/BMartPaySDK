@@ -32,6 +32,7 @@ public class BigFunSDK {
      */
     static boolean isDebug = false;
     private static String mSource;
+    private static final String VERSION = "1.0.1";
 
     private BigFunSDK() {
 
@@ -91,7 +92,7 @@ public class BigFunSDK {
             map.put("androidId", Settings.System.getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID));
             map.put("ip", IpUtils.getOutNetIP(mContext, 0));
             map.put("channelCode", mChannel);
-            map.put("verCode", Utils.getVersionName(mContext));
+            map.put("verCode", VERSION);
             map.put("source", mSource);
             map.put("packageName", mContext.getPackageName());
             if (!map.containsKey("email")) {

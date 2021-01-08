@@ -71,7 +71,6 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, "请输入渠道号或者Key", Toast.LENGTH_SHORT).show()
             return
         }
-        BigFunSDK.getInstance().init(applicationContext, channel, key)
         tv_result.text = "sdk初始化成功"
     }
 
@@ -110,19 +109,6 @@ class MainActivity : AppCompatActivity() {
                         return
                     }
                     map["gameUserId"] = gameUserId
-                    BigFunSDK.getInstance().fbLogin(map, object : ResponseListener {
-                        override fun onSuccess() {
-                            runOnUiThread {
-                                tv_result.text = "fb登录成功"
-                            }
-                        }
-
-                        override fun onFail(msg: String?) {
-                            runOnUiThread {
-                                tv_result.text = "fb登录失败-$msg"
-                            }
-                        }
-                    })
                 }
             }
         })
@@ -157,19 +143,6 @@ class MainActivity : AppCompatActivity() {
             "gameUserId" to gameUserId,
             "mobile" to phone
         )
-        BigFunSDK.getInstance().phoneLogin(map, object : ResponseListener {
-            override fun onSuccess() {
-                runOnUiThread {
-                    tv_result.text = "手机号登录成功"
-                }
-            }
-
-            override fun onFail(msg: String?) {
-                runOnUiThread {
-                    tv_result.text = "手机号登录失败-$msg"
-                }
-            }
-        })
     }
 
     /**
@@ -184,19 +157,6 @@ class MainActivity : AppCompatActivity() {
         val map = mutableMapOf<String, Any?>(
             "gameUserId" to gameUserId
         )
-        BigFunSDK.getInstance().guestLogin(map, object : ResponseListener {
-            override fun onSuccess() {
-                runOnUiThread {
-                    tv_result.text = "游客登录成功"
-                }
-            }
-
-            override fun onFail(msg: String?) {
-                runOnUiThread {
-                    tv_result.text = "游客登录失败--$msg"
-                }
-            }
-        })
     }
 
     /**
@@ -275,19 +235,6 @@ class MainActivity : AppCompatActivity() {
                         return
                     }
                     map["gameUserId"] = gameUserId
-                    BigFunSDK.getInstance().googleLogin(map, object : ResponseListener {
-                        override fun onSuccess() {
-                            runOnUiThread {
-                                tv_result.text = "google登录成功"
-                            }
-                        }
-
-                        override fun onFail(msg: String?) {
-                            runOnUiThread {
-                                tv_result.text = "google登录失败--$msg"
-                            }
-                        }
-                    })
                 } catch (e: ApiException) {
                     Log.d(TAG, "onActivityResult: error" + e.message)
                     e.printStackTrace()

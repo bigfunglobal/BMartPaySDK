@@ -26,20 +26,20 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             BigFunSDK.getInstance().payOrder(mutableMapOf<String, Any>(
-                "orderId" to "202012301752539825669240"
+                "orderId" to et_order.text.toString().trim()
             ), this, object : ResponseListener {
                 override fun onSuccess() {
                     runOnUiThread {
                         tv.text = "下单成功"
                     }
-                    Log.d(TAG, "onSuccess: 预下单")
+                    Log.d(TAG, "onSuccess: 下单成功")
                 }
 
                 override fun onFail(msg: String?) {
                     runOnUiThread {
                         tv.text = "下单失败$msg"
                     }
-                    Log.d(TAG, "onFail: 预下单--$msg")
+                    Log.d(TAG, "onFail: 下单失败--$msg")
                 }
 
             })
