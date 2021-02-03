@@ -16,7 +16,7 @@ class App : Application() {
         BigFunSDK.setDebug(true)
         BigFunSDK.getInstance().init(
             applicationContext,
-            "kofreedemo-5jzrjmrf3"
+            "bmartpay_test"
         )
     }
 }

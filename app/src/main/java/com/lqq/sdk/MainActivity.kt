@@ -20,13 +20,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_second)
 
         btn_order.setOnClickListener {
-            val orderId = et_order.text.toString().trim()
-            if (orderId.isEmpty()) {
-                Toast.makeText(applicationContext, "请输入单号", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+//            val orderId = et_order.text.toString().trim()
+//            if (orderId.isEmpty()) {
+//                Toast.makeText(applicationContext, "请输入单号", Toast.LENGTH_SHORT).show()
+//                return@setOnClickListener
+//            }
             BigFunSDK.getInstance().payOrder(mutableMapOf<String, Any>(
-                "orderId" to et_order.text.toString().trim()
+                "orderId" to "202101291630099146857008"
             ), this, object : ResponseListener {
                 override fun onSuccess() {
                     runOnUiThread {

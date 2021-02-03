@@ -78,15 +78,9 @@ public class PayUtils {
                 String[] split = s.split("=");
                 map.put(split[0], split[1]);
             }
-            if (map.get("orderid") != null && !TextUtils.isEmpty(map.get("orderid")) &&
+            if (map.get("orderId") != null && !TextUtils.isEmpty(map.get("orderId")) &&
                     map.get("txnToken") != null && !TextUtils.isEmpty(map.get("txnToken")) &&
                     map.get("mid") != null && !TextUtils.isEmpty(map.get("mid"))) {
-                activity.runOnUiThread(() -> {
-                    Intent intent = new Intent(activity, PayActivity.class);
-                    intent.putExtra(Constant.EXTRA_KEY_PAY_URL, bean.getJumpUrl());
-                    activity.startActivity(intent);
-                });
-            } else {
                 if (Utils.isInstall(BigFunSDK.mContext, "net.one97.paytm")) {
                     //安装Paytm
                     String version = Utils.getVersion(BigFunSDK.mContext);
@@ -120,6 +114,12 @@ public class PayUtils {
                     intent.putExtra(Constant.EXTRA_KEY_PAY_URL, bean.getJumpUrl());
                     activity.startActivity(intent);
                 }
+            } else {
+                activity.runOnUiThread(() -> {
+                    Intent intent = new Intent(activity, PayActivity.class);
+                    intent.putExtra(Constant.EXTRA_KEY_PAY_URL, bean.getJumpUrl());
+                    activity.startActivity(intent);
+                });
             }
         } catch (Exception e) {
             HttpUtils.getInstance().report(HttpUtils.PAY_FAIL, e.getMessage());
